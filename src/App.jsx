@@ -27,10 +27,17 @@ function App() {
 		setGameStage(STAGES[1].name);
 	};
 
+	// inicialmente, a função vai
+	// manter o fluxo do jogo para
+	// o gameOver
+	const verifyLetter = () => {
+		setGameStage(STAGES[2].name);
+	}
+
 	return (
 		<div className="App">
 			{gameStage === 'start' && <StartScreen startGame={startGame} />}
-			{gameStage === 'game' && <Game />}
+			{gameStage === 'game' && <Game verifyLetter={verifyLetter}/>}
 			{gameStage === 'end' && <GameOver />}
 		</div>
 	);

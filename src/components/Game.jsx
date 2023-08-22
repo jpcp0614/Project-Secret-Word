@@ -1,9 +1,17 @@
-import './Game.css'
+import PropTypes from 'prop-types';
+import './Game.css';
 
-const Game = () => {
-  return (
-    <div>Game</div>
-  )
-}
+const Game = ({ verifyLetter }) => {
+	return (
+		<div>
+			<h1>Game</h1>
+			<button onClick={verifyLetter}>End</button>
+		</div>
+	);
+};
 
-export default Game
+Game.propTypes = {
+	verifyLetter: PropTypes.func,
+};
+
+export default Game;
