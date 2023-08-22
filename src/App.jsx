@@ -22,11 +22,14 @@ function App() {
 	const [gameStage, setGameStage] = useState(STAGES[0].name);
 	const [words] = useState(wordsList);
 
-	console.log(words);
+		// start secret word game
+	const startGame = () => {
+		setGameStage(STAGES[1].name);
+	};
 
 	return (
 		<div className="App">
-			{gameStage === 'start' && <StartScreen />}
+			{gameStage === 'start' && <StartScreen startGame={startGame} />}
 			{gameStage === 'game' && <Game />}
 			{gameStage === 'end' && <GameOver />}
 		</div>
