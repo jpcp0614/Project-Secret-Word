@@ -71,6 +71,19 @@ function App() {
 		}
 	}
 
+	const pushGuessedLetterOrRemoveGuess = (letter) => {
+		if (letters.includes(letter)) {
+			setGuessedLetters((actualGuessedLetter) => [
+				...actualGuessedLetter, letter
+			]);
+		} else {
+			setWrongLetters((actualWrongLetter) => [
+				...actualWrongLetter, letter
+			]);
+			setGuesses((actualGuesses) => actualGuesses - 1);
+		}
+	}
+
 	// verify the letter
 	const verifyLetter = (letter) => {
 		const normalizedLetter = letter.toLowerCase();
@@ -79,18 +92,7 @@ function App() {
 		checkLetterAlreadyUtilized(normalizedLetter);
 
 		// push guessed letter or remove a guess
-		if (letters.includes(normalizedLetter)) {
-			// pego todos os elementos atuais
-			// do array e adiciono
-			// a nova letra (spread operator)
-			setGuessedLetters((actualGuessedLetter) => [
-				...actualGuessedLetter, normalizedLetter
-			]);
-		} else {
-			setWrongLetters((actualWrongLetter) => [
-				...actualWrongLetter, normalizedLetter
-			]);
-		}
+		pushGuessedLetterOrRemoveGuess(normalizedLetter);
 
 		console.log('guessedLetters ', guessedLetters);
 		console.log('wrongLetters ', wrongLetters);
