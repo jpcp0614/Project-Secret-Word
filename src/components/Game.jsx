@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import './Game.css';
 
-const Game = ({ verifyLetter }) => {
+const Game = () => {
 	return (
 		<div className="game">
 			<p className="points">
 				<span>Score: 000</span>
 			</p>
 			<h1>Guess the word</h1>
-			<h3>
+			<h3 className="tip">
 				Any tip? <span>TIP</span>{' '}
 			</h3>
 			<div className="wordContainer">
