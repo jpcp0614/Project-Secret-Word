@@ -5,16 +5,23 @@ import './Game.css';
 import PropTypes from 'prop-types';
 
 // React
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const Game = ({ states, verifyLetter }) => {
 	const [letter, setLetter] = useState('');
+
+	// Essa hook cria uma referência
+	const letterInputRef = useRef(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		verifyLetter(letter);
 		setLetter('');
+
+		// focar nesse elemento após
+		// o fim do submit
+		letterInputRef.current.focus();
 	};
 
 	return (
@@ -48,6 +55,7 @@ const Game = ({ states, verifyLetter }) => {
 						required
 						onChange={(e) => setLetter(e.target.value)}
 						value={letter}
+						ref={letterInputRef}
 					/>
 					<button>Play</button>
 				</form>
