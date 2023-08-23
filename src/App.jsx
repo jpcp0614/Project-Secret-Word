@@ -63,7 +63,7 @@ function App() {
 
 	// verify the letter
 	const verifyLetter = (letter) => {
-		console.log(letter)
+		console.log(letter);
 	};
 
 	// reinicia o jogo

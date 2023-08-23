@@ -14,6 +14,7 @@ const Game = ({ states, verifyLetter }) => {
 		e.preventDefault();
 
 		verifyLetter(letter);
+		setLetter('');
 	};
 
 	return (
