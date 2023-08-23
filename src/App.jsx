@@ -61,9 +61,39 @@ function App() {
 		setGameStage(STAGES[1].name);
 	};
 
+	// check if letter has already been utilized
+	const checkLetterAlreadyUtilized = (letter) => {
+		if (
+			guessedLetters.includes(letter) ||
+			wrongLetters.includes(letter)
+		) {
+			return;
+		}
+	}
+
 	// verify the letter
 	const verifyLetter = (letter) => {
-		console.log(letter);
+		const normalizedLetter = letter.toLowerCase();
+
+		// check if letter has already been utilized
+		checkLetterAlreadyUtilized(normalizedLetter);
+
+		// push guessed letter or remove a guess
+		if (letters.includes(normalizedLetter)) {
+			// pego todos os elementos atuais
+			// do array e adiciono
+			// a nova letra (spread operator)
+			setGuessedLetters((actualGuessedLetter) => [
+				...actualGuessedLetter, normalizedLetter
+			]);
+		} else {
+			setWrongLetters((actualWrongLetter) => [
+				...actualWrongLetter, normalizedLetter
+			]);
+		}
+
+		console.log('guessedLetters ', guessedLetters);
+		console.log('wrongLetters ', wrongLetters);
 	};
 
 	// reinicia o jogo
