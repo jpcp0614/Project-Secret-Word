@@ -2,7 +2,7 @@
 import './App.css';
 
 // React
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // data
 import { wordsList } from './data/words';
@@ -63,40 +63,47 @@ function App() {
 
 	// check if letter has already been utilized
 	const checkLetterAlreadyUtilized = (letter) => {
-		if (
-			guessedLetters.includes(letter) ||
-			wrongLetters.includes(letter)
-		) {
+		if (guessedLetters.includes(letter) || wrongLetters.includes(letter)) {
 			return;
 		}
-	}
+	};
 
+	// push guessed letter or remove a guess
 	const pushGuessedLetterOrRemoveGuess = (letter) => {
 		if (letters.includes(letter)) {
 			setGuessedLetters((actualGuessedLetter) => [
-				...actualGuessedLetter, letter
+				...actualGuessedLetter,
+				letter,
 			]);
 		} else {
-			setWrongLetters((actualWrongLetter) => [
-				...actualWrongLetter, letter
-			]);
+			setWrongLetters((actualWrongLetter) => [...actualWrongLetter, letter]);
 			setGuesses((actualGuesses) => actualGuesses - 1);
 		}
-	}
+	};
 
 	// verify the letter
 	const verifyLetter = (letter) => {
 		const normalizedLetter = letter.toLowerCase();
 
-		// check if letter has already been utilized
 		checkLetterAlreadyUtilized(normalizedLetter);
-
-		// push guessed letter or remove a guess
 		pushGuessedLetterOrRemoveGuess(normalizedLetter);
-
-		console.log('guessedLetters ', guessedLetters);
-		console.log('wrongLetters ', wrongLetters);
+		// console.log('guessedLetters ', guessedLetters);
+		// console.log('wrongLetters ', wrongLetters);
 	};
+
+	const clearLetterStates = () => {
+		setGuessedLetters([]);
+		setWrongLetters([]);
+	}
+
+	// monitorar o estado das guesses
+	useEffect(() => {
+		if (guesses <= 0) {
+			// reset all states
+			clearLetterStates();
+			setGameStage(STAGES[2].name)
+		}
+	}, [guesses]);
 
 	// reinicia o jogo
 	const restartGame = () => {
