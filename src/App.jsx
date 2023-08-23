@@ -56,9 +56,6 @@ function App() {
 		let wordLetters = word.split('');
 		wordLetters = wordLetters.map((letter) => letter.toLowerCase());
 
-		// console.log(word, category);
-		// console.log(wordLetters);
-
 		// fill states
 		setPickedWord(word);
 		setPickedCategory(category);
@@ -92,8 +89,6 @@ function App() {
 
 		checkLetterAlreadyUtilized(normalizedLetter);
 		pushGuessedLetterOrRemoveGuess(normalizedLetter);
-		// console.log('guessedLetters ', guessedLetters);
-		// console.log('wrongLetters ', wrongLetters);
 	};
 
 	const clearLetterStates = () => {
