@@ -1,19 +1,25 @@
 import PropTypes from 'prop-types';
 import './Game.css';
 
-const Game = () => {
+const Game = ({ states, verifyLetter }) => {
 	return (
 		<div className="game">
 			<p className="points">
-				<span>Score: 000</span>
+				<span>Score: {states.score}</span>
 			</p>
 			<h1>Guess the word</h1>
 			<h3 className="tip">
-				Any tip? <span>TIP</span>{' '}
+				Any tip? <span>{states.pickedCategory}</span>
 			</h3>
+			<p>You still have {states.guesses} tries</p>
 			<div className="wordContainer">
-				<span className="letter">A</span>
-				<div className="blankSquare"></div>
+				{states.letters.map((letter, index) =>
+					states.guessedLetters.includes(letter) ? (
+						<span key={index} className="letter">{letter}</span>
+					) : (
+						<span key={index} className="blankSquare"></span>
+					)
+				)}
 			</div>
 			<div className="letterContainer">
 				<p>Try to guess a letter:</p>
@@ -24,15 +30,17 @@ const Game = () => {
 			</div>
 			<div className="wrongLettersContainer">
 				<p>Letters already chosen</p>
-        <span>a, </span>
-        <span>b, </span>
+				{states.wrongLetters.map((letter, index) => (
+					<span key={index}>{letter} </span>
+				))}
 			</div>
 		</div>
 	);
 };
 
 Game.propTypes = {
-	verifyLetter: PropTypes.func,
-};
+	states: PropTypes.any,
+	verifyLetter: PropTypes.any
+}
 
 export default Game;
