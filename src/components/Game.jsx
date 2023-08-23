@@ -1,7 +1,21 @@
-import PropTypes from 'prop-types';
+// CSS
 import './Game.css';
 
+// PropTypes
+import PropTypes from 'prop-types';
+
+// React
+import { useState } from 'react';
+
 const Game = ({ states, verifyLetter }) => {
+	const [letter, setLetter] = useState('');
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		verifyLetter(letter);
+	};
+
 	return (
 		<div className="game">
 			<p className="points">
@@ -15,7 +29,9 @@ const Game = ({ states, verifyLetter }) => {
 			<div className="wordContainer">
 				{states.letters.map((letter, index) =>
 					states.guessedLetters.includes(letter) ? (
-						<span key={index} className="letter">{letter}</span>
+						<span key={index} className="letter">
+							{letter}
+						</span>
 					) : (
 						<span key={index} className="blankSquare"></span>
 					)
@@ -23,8 +39,15 @@ const Game = ({ states, verifyLetter }) => {
 			</div>
 			<div className="letterContainer">
 				<p>Try to guess a letter:</p>
-				<form>
-					<input type="text" name="letter" maxLength="1" required />
+				<form onSubmit={handleSubmit}>
+					<input
+						type="text"
+						name="letter"
+						maxLength="1"
+						required
+						onChange={(e) => setLetter(e.target.value)}
+						value={letter}
+					/>
 					<button>Play</button>
 				</form>
 			</div>
@@ -40,7 +63,7 @@ const Game = ({ states, verifyLetter }) => {
 
 Game.propTypes = {
 	states: PropTypes.any,
-	verifyLetter: PropTypes.any
-}
+	verifyLetter: PropTypes.any,
+};
 
 export default Game;

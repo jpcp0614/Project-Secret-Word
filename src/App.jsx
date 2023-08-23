@@ -61,11 +61,9 @@ function App() {
 		setGameStage(STAGES[1].name);
 	};
 
-	// inicialmente, a função vai
-	// manter o fluxo do jogo para
-	// o gameOver
-	const verifyLetter = () => {
-		setGameStage(STAGES[2].name);
+	// verify the letter
+	const verifyLetter = (letter) => {
+		console.log(letter)
 	};
 
 	// reinicia o jogo
