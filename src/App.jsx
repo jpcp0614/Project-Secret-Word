@@ -18,6 +18,8 @@ const STAGES = [
 	{ id: 3, name: 'end' },
 ];
 
+const GUESSESQTY = 3;
+
 function App() {
 	const [gameStage, setGameStage] = useState(STAGES[0].name);
 	const [words] = useState(wordsList);
@@ -26,7 +28,7 @@ function App() {
 	const [letters, setLetters] = useState([]);
 	const [guessedLetters, setGuessedLetters] = useState([]);
 	const [wrongLetters, setWrongLetters] = useState([]);
-	const [guesses, setGuesses] = useState(3);
+	const [guesses, setGuesses] = useState(GUESSESQTY);
 	const [score, setScore] = useState(0);
 
 	const pickWordAndCategory = () => {
@@ -107,6 +109,8 @@ function App() {
 
 	// reinicia o jogo
 	const restartGame = () => {
+		setScore(0);
+		setGuesses(GUESSESQTY);
 		setGameStage(STAGES[0].name);
 	};
 
